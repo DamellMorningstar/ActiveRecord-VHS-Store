@@ -12,9 +12,23 @@ Client.reset_pk_sequence
 # Movie.reset_pk_sequence
 
 
-def create_movie_joins(movie, genre_array)
-    genre_array.each{|genre| MovieGenre.create(movie_id: movie.id, genre_id: genre.id)}
-end
+# def create_movie_joins(movie, genre_array)
+#     genre_array.each{ |genre| MovieGenre.create(movie_id: movie.id, genre_id: genre.id)}
+# end
+
+# movies
+die_hard = Movie.create(title: 'Die Hard', director: 'da-mell', year: 2020, length: 3, female_director: 'alex')
+
+# client
+nick = Client.create(name: 'nick', home_address: 'nyc')
+
+# vhs
+vhs_1 = Vhs.create(serial_number: "af34531ead", movie_id:  Movie.first.id)
+
+# rental 
+rent_die_hard = Rental.create(current: true, created_at: Time.now, client_id: Client.first.id, vhs_id: Vhs.first.id)
+
+
 
 ####### GENRES ########
 puts "✨ creating genres... ✨"
@@ -177,20 +191,20 @@ puts "✨ creating movies and movie_genres... ✨"
 ####### CLIENTS ########
 puts "✨ creating clients... ✨"
 
-# 20.times do 
-#     name = [
-#         Faker::Movies::HitchhikersGuideToTheGalaxy.character, 
-#         Faker::TvShows::TwinPeaks.character,
-#         Faker::TvShows::TheFreshPrinceOfBelAir.character,
-#         Faker::TvShows::RuPaul.queen,
-#         Faker::BossaNova.artist
-#     ].sample
-#     puts "🍿 #{name}, welcome to our sick vhs store!"
-#     Client.create(
-#         name: name, 
-#         home_address: Faker::Address.full_address
-#     )
-# end
+20.times do 
+    name = [
+        Faker::Movies::HitchhikersGuideToTheGalaxy.character, 
+        Faker::TvShows::TwinPeaks.character,
+        Faker::TvShows::TheFreshPrinceOfBelAir.character,
+        Faker::TvShows::RuPaul.queen,
+        Faker::BossaNova.artist
+    ].sample
+    puts "🍿 #{name}, welcome to our sick vhs store!"
+    Client.create(
+        name: name, 
+        home_address: Faker::Address.full_address
+    )
+end
 
 ####### VHS ########
 puts "✨ creating vhs... ✨"
@@ -200,26 +214,26 @@ puts "✨ creating vhs... ✨"
 #     Vhs.create(movie_id: random_movie_id)
 # end
 
-####### Rentals ########
-puts "✨ creating rentals... ✨"
+# ####### Rentals ########
+# puts "✨ creating rentals... ✨"
 
 # def find_vhs_id_for_rent
 #     random_vhs_id = rand(1..Vhs.all.count)
 #     vhs = Vhs.find(random_vhs_id)
-#     return vhs.id if !vhs.rentals || vhs.rentals.select{|r| r.current}.empty?
+#     return vhs.id if !vhs.rentals || vhs.rentals.select{ |r| r.current}.empty?
 #     find_vhs_id_for_rent
 # end
 
-# def random_client_id
+# def random_client_id # 
 #     random_client_id = rand(1..Client.all.count)
 #     Client.find(random_client_id).id
 # end
 
 # # create rentals (min 20, max 60)
-# 20.times do
+# 20.times do 
 #     number_of_vhs_rented_at_once = rand(1..3)
-#     client_id = random_client_id
-#     vhs_id = find_vhs_id_for_rent
+#     client_id = random_client_id # calling this function with no parameter
+#     vhs_id = find_vhs_id_for_rent # calling this function with no parameter
 #     number_of_vhs_rented_at_once.times do
 #         Rental.create(client_id: client_id, vhs_id: vhs_id, current: true)
 #     end

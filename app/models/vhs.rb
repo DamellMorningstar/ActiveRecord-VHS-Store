@@ -1,4 +1,10 @@
 class Vhs < ActiveRecord::Base
+
+    has_many :rentals 
+    belongs_to :movie 
+    has_many :clients, through: :rentals
+
+    
     after_initialize :add_serial_number
 
 
