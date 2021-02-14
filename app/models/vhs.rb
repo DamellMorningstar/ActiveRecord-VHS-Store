@@ -7,6 +7,10 @@ class Vhs < ActiveRecord::Base
     
     after_initialize :add_serial_number
 
+    def self.available_now
+        Rental.find_by(vhs_id: self.id, current: false)
+    end
+
 
     private
 
